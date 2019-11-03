@@ -2,7 +2,7 @@
   
   var myCalculator = window.myCalculator = (window.myCalculator || {});
 
-  var numbers = ["0","1","2","3","4","5","6","7","8","9","."];
+  var numbers = ["1","2","3","4","5","6","7","8","9","0","."];
   var operators = ["+","-","*","/","=", "C", "CE"];
   var current_expression = "";
   var total = 0;
@@ -16,8 +16,10 @@
 
 
   var addButtons = function() {
-    var parent = document.getElementById("buttons");
+    var parent = document.getElementById("button_container");
     var options = numbers.concat(operators);
+    var buttonCounter = 0;
+
     for(var i = 0; i < options.length; i++) {
       let new_button = document.createElement("div");
       new_button.setAttribute("class", "calc_button");
@@ -97,7 +99,7 @@
       return;
     }
 
-    let new_total = orderOfOperations(expr_arr);
+    let new_total = parseFloat(orderOfOperations(expr_arr));
 
     updateTotal(new_total);
     current_expression = "";
