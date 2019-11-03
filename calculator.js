@@ -2,8 +2,8 @@
   
   var myCalculator = window.myCalculator = (window.myCalculator || {});
 
-  var numbers = ["0","1","2","3","4","5","6","7","8","9"];
-  var operators = ["+","-","*","/","="];
+  var numbers = ["0","1","2","3","4","5","6","7","8","9","."];
+  var operators = ["+","-","*","/","=", "C", "CE"];
   var current_expression = "";
   var total = 0;
 
@@ -34,15 +34,22 @@
     var button = event.target
     var value = button.getAttribute("value")
 
-    if (!isNaN(value)) {
+    if (!isNaN(value) || value === ".") {
       // isNaN will return false if the value is NOT a number. Thus !isNan will
       // return true if it is a number.
 
       addNumber(value);
     } else if (value === "=") {
       evaluateCurrentExpression();
+    } else if (value === "C") {
+      current_expression = "";
+      updateCurrentExpression();
+    } else if (value === "CE") {
+      current_expression = "";
+      updateCurrentExpression();
+      updateTotal(0);
     } else {
-      addOperand(value);
+      addOperator(value);
     }
   };
 
@@ -53,7 +60,7 @@
   };
 
 
-  var addOperand = function(value) {
+  var addOperator = function(value) {
     if (operators.includes(current_expression.charAt(current_expression.length - 2))) {
       // Prevent adding two operators in a row.
       return;
@@ -133,8 +140,8 @@
     for (var i = 0; i < expr_arr.length-1; i++) {
       if (md.includes(expr_arr[i])) {
         var temp_total;
-        let first_num = parseInt(expr_arr[i-1]);
-        let second_num = parseInt(expr_arr[i+1]);
+        let first_num = parseFloat(expr_arr[i-1]);
+        let second_num = parseFloat(expr_arr[i+1]);
 
         if (expr_arr[i] === "*") {
           temp_total = first_num * second_num;
@@ -158,15 +165,16 @@
     for (var i = 0; i < expr_arr.length-1; i++) {
       if (as.includes(expr_arr[i])) {
         var temp_total;
-        let first_num = parseInt(expr_arr[i-1]);
-        let second_num = parseInt(expr_arr[i+1]);
-
+        let first_num = parseFloat(expr_arr[i-1]);
+        let second_num = parseFloat(expr_arr[i+1]);
+        console.log(first_num);
+        console.log(second_num);
         if (expr_arr[i] === "+") {
             temp_total = first_num + second_num;
         } else {
             temp_total = first_num - second_num;
         }
-
+        console.log(temp_total);
         expr_arr.splice(i-1, 3, temp_total); // Remove the three elements and insert total
 
         i -= 2; // Adjust for the two removed values.
