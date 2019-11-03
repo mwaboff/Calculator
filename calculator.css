@@ -1,5 +1,12 @@
 body {
     box-sizing: border-box;
+    background-color: orange;
+}
+
+#calculator_container {
+    width: 400px;
+    height: 100%;
+    margin: 0 auto;
 }
 
 #output_container {
@@ -16,16 +23,13 @@ body {
 }
 
 #curr_expression {
-    font-size: 50px;
+    font-size: 40px;
+    margin: 5px;
 }
 
 #total {
-    font-size: 30px;
-}
-
-#calculator_container {
-    width: 400px;
-    height: 100%;
+    font-size: 20px;
+    margin: 5px;
 }
 
 #button_container {
@@ -35,6 +39,7 @@ body {
 
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+
     /*padding: 5px;*/
     /*grid-row-gap: 10px;*/
 }
@@ -52,6 +57,8 @@ body {
 
     text-align: center;
     font-size: 30px;
+    font-family: 'Work Sans', sans-serif;
+
 
     
     margin: 3px;

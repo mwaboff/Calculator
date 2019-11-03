@@ -126,11 +126,13 @@
     }
 
     let new_total = parseFloat(orderOfOperations(expr_arr));
+    new_total = new_total.toFixed(2);
 
     if (current_expression != "") {
       updateTotal(new_total);
+
     }
-    
+
     current_expression = "";
     updateCurrentExpression();
   };
