@@ -5,7 +5,9 @@
   var keys = ["+","-","*","/","7","8","9","=","4","5","6","1","2","3","0",".","AC"];
   // var numbers = ["7","8","9","4","5","6","1","2","3","0","."];
 
-  // var operators = ["=","+","-","*","/","C", "CE"];
+  //julia is awesome
+
+  var operators = ["=","+","-","*","/","C", "CE"];
   var current_expression = "";
   var total = 0;
 
@@ -125,7 +127,10 @@
 
     let new_total = parseFloat(orderOfOperations(expr_arr));
 
-    updateTotal(new_total);
+    if (current_expression != "") {
+      updateTotal(new_total);
+    }
+    
     current_expression = "";
     updateCurrentExpression();
   };
