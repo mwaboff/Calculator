@@ -2,8 +2,10 @@
   
   var myCalculator = window.myCalculator = (window.myCalculator || {});
 
-  var numbers = ["1","2","3","4","5","6","7","8","9","0","."];
-  var operators = ["+","-","*","/","=", "C", "CE"];
+  var keys = ["+","-","*","/","7","8","9","=","4","5","6","1","2","3","0",".","AC"];
+  // var numbers = ["7","8","9","4","5","6","1","2","3","0","."];
+
+  // var operators = ["=","+","-","*","/","C", "CE"];
   var current_expression = "";
   var total = 0;
 
@@ -17,10 +19,12 @@
 
   var addButtons = function() {
     var parent = document.getElementById("button_container");
-    var options = numbers.concat(operators);
+    //var options = numbers.concat(operators);
+    var options = keys;
     var buttonCounter = 0;
 
     for(var i = 0; i < options.length; i++) {
+
       let new_button = document.createElement("div");
       new_button.setAttribute("class", "calc_button");
       new_button.setAttribute("id", "button_"+options[i]);
@@ -43,17 +47,37 @@
       addNumber(value);
     } else if (value === "=") {
       evaluateCurrentExpression();
-    } else if (value === "C") {
-      current_expression = "";
-      updateCurrentExpression();
+    } else if (value === "AC" || value === "C") {
+      clear();
+      // current_expression = "";
+      // updateCurrentExpression();
     } else if (value === "CE") {
-      current_expression = "";
-      updateCurrentExpression();
-      updateTotal(0);
+      // current_expression = "";
+      // updateCurrentExpression();
+      // updateTotal(0);
     } else {
       addOperator(value);
     }
+
+    updateClearButton();
   };
+
+  var updateClearButton = function() {
+    if (current_expression != "") {
+      document.getElementById("button_AC").innerText = "C";
+    } else {
+      document.getElementById("button_AC").innerText = "AC";
+    }
+  }
+
+  var clear = function() {
+    if (current_expression != "") {
+      current_expression = "";
+      updateCurrentExpression();
+    } else {
+      updateTotal(0);
+    }
+  }
 
 
   var addNumber = function(value) {
