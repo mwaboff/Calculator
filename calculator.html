@@ -23,10 +23,23 @@
             myCalculator.initialize();
 
             document.onkeypress = function (e) {
-              // Trick found here: https://stackoverflow.com/a/16089470
-              e = e || window.event;
-              myCalculator.keyPress(e);
+                // Trick found here: https://stackoverflow.com/a/16089470
+                // e = e || window.event;
+                // myCalculator.keyPress(e);
             };
+
+            document.onkeydown = function(e) {
+                // console.log(e);
+                e = e || window.event;
+                myCalculator.keyDown(e);
+            }
+
+            document.onkeyup = function(e) {
+                // console.log(e);
+                e = e || window.event;
+                myCalculator.keyUp(e);
+
+            }
         })();
     </script>
 </body>

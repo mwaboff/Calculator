@@ -69,11 +69,11 @@ body {
 }
 
 .calc_button:hover {
-    background-color: #D3D3D3;
+    filter: brightness(90%);
 }
 
 .calc_button:active {
-    background-color: #B3B3B3;
+    filter: brightness(70%);
 }
 
 #button_\= {
@@ -84,22 +84,11 @@ body {
     background-color: #63fdb6;
 }
 
-#button_\=:hover {
-    background-color: #53eda6;
-}
-
-#button_\=:active {
-    background-color: #33cd86;
-}
-
 #button_C {
     background-color: #fb6767;
 }
 
-#button_C:hover {
-    background-color: #eb5757;
-}
 
-#button_C:active {
-    background-color: #cb3737;
+.clicked_button {
+    filter: brightness(50%);
 }

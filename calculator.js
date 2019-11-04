@@ -10,6 +10,11 @@
   var current_expression = "";
   var total = 0;
 
+  var keyMapping = {48: "0", 96: "0", 49: "1", 97: "1", 50: "2", 98: "2", 
+    51: "3", 99: "3", 52: "4", 100: "4", 53: "5", 101: "5", 54: "6", 102: "6", 
+    55: "7", 103: "7", 56: "8", 104: "8", 57: "9", 105: "9", 43: "+", 107: "+", 
+    45: "-", 109: "-", 42: "*", 106: "*", 47: "/", 107: "/", 61: "=", 13: "=", 
+    190: ".", 110: ".", 46: "C", 8: "C"};
 
   myCalculator.initialize = function() {
     updateCurrentExpression();
@@ -38,8 +43,9 @@
 
 
   myCalculator.buttonClick = function(event) {
-    var button = event.target;
-    processButton(button.getAttribute("value"));
+    var button_value = event.target.getAttribute("value");
+    processButton(button_value);
+    colorButton(button_value);
   };
 
   var processButton = function(value) {
@@ -203,27 +209,42 @@
     return expr_arr;
   }
 
-  myCalculator.keyPress = function(event) {
-    console.log(event.keyCode);
-    let keyMapping = {
-      48: "0",
-      49: "1",
-      50: "2",
-      51: "3",
-      52: "4",
-      53: "5",
-      54: "6",
-      55: "7",
-      56: "8",
-      57: "9",
-      43: "+",
-      45: "-",
-      42: "*",
-      47: "/",
-      61: "=",
-      13: "=",
-      99: "C"
+  // myCalculator.keyPress = function(event) {
+  //   console.log(event.keyCode);
+  //   if (Object.keys(keyMapping).includes(event.keyCode)) {
+  //     processButton(keyMapping[event.keyCode]);
+  //   }
+  // }
+
+  myCalculator.keyDown = function(event) {
+    var value = event.keyCode;
+    console.log(event);
+    if (Object.keys(keyMapping).includes(value.toString())) {
+      let translated = keyMapping[event.keyCode];
+      processButton(translated);
+      buttonDown(translated);
     }
-    processButton(keyMapping[event.keyCode]);
+  }
+
+  myCalculator.keyUp = function(event) {
+    var value = event.keyCode;
+    if (Object.keys(keyMapping).includes(value.toString())) {
+      let translated = keyMapping[event.keyCode];
+      buttonUp(translated);
+    }
+  }
+
+  var buttonDown = function(button_value) {
+    button = document.getElementById("button_" + button_value.toString());
+    console.log("DOWN button_" + button_value);
+    console.log(button);
+    button.classList.add("clicked_button");
+  }
+
+  var buttonUp = function(button_value) {
+    button = document.getElementById("button_" + button_value.toString());
+    console.log("UP button_" + button_value);
+    console.log(button);
+    button.classList.remove("clicked_button");
   }
 })();
