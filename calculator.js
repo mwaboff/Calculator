@@ -1,11 +1,10 @@
 (function() {
   
+  // Set the namespace to prevent any potential collisions.
+  // Is all of this necessary though?
   var myCalculator = window.myCalculator = (window.myCalculator || {});
 
-  var keys = ["+","-","*","/","7","8","9","=","4","5","6","1","2","3","0",".","AC"];
-  // var numbers = ["7","8","9","4","5","6","1","2","3","0","."];
-
-  //julia is awesome
+  var keys = ["+","-","*","/","7","8","9","=","4","5","6","1","2","3","0",".","C"];
 
   var operators = ["=","+","-","*","/","C", "CE"];
   var current_expression = "";
@@ -13,15 +12,15 @@
 
 
   myCalculator.initialize = function() {
-    addButtons();
     updateCurrentExpression();
     updateTotal(0);
+
+    addButtons();
   }
 
 
   var addButtons = function() {
     var parent = document.getElementById("button_container");
-    //var options = numbers.concat(operators);
     var options = keys;
     var buttonCounter = 0;
 
@@ -39,9 +38,11 @@
 
 
   myCalculator.buttonClick = function(event) {
-    var button = event.target
-    var value = button.getAttribute("value")
+    var button = event.target;
+    processButton(button.getAttribute("value"));
+  };
 
+  var processButton = function(value) {
     if (!isNaN(value) || value === ".") {
       // isNaN will return false if the value is NOT a number. Thus !isNan will
       // return true if it is a number.
@@ -49,36 +50,17 @@
       addNumber(value);
     } else if (value === "=") {
       evaluateCurrentExpression();
-    } else if (value === "AC" || value === "C") {
+    } else if (value === "C") {
       clear();
-      // current_expression = "";
-      // updateCurrentExpression();
-    } else if (value === "CE") {
-      // current_expression = "";
-      // updateCurrentExpression();
-      // updateTotal(0);
     } else {
       addOperator(value);
-    }
-
-    updateClearButton();
-  };
-
-  var updateClearButton = function() {
-    if (current_expression != "") {
-      document.getElementById("button_AC").innerText = "C";
-    } else {
-      document.getElementById("button_AC").innerText = "AC";
     }
   }
 
   var clear = function() {
-    if (current_expression != "") {
-      current_expression = "";
-      updateCurrentExpression();
-    } else {
-      updateTotal(0);
-    }
+    current_expression = "";
+    updateCurrentExpression();
+    updateTotal(0);
   }
 
 
@@ -114,41 +96,45 @@
 
   var updateTotal = function(new_total) {
     total = new_total;
-    document.getElementById("total").innerText = total;
+    // document.getElementById("total").innerText = total;
   }
 
 
   var evaluateCurrentExpression = function() {
     expr_arr = current_expression.split(" ");
 
-    if (!checkValidity(expr_arr)) {
+    if (current_expression == "" || !checkValidity(expr_arr)) {
       return;
     }
 
     let new_total = parseFloat(orderOfOperations(expr_arr));
     new_total = new_total.toFixed(2);
 
-    if (current_expression != "") {
-      updateTotal(new_total);
+    updateTotal(new_total);
 
-    }
-
+    // Here we are manually updating the current expression without clearing 
+    // out the text on screen since it was confusing for test users. This is why
+    // I am not using updateCurrentExpression().
     current_expression = "";
-    updateCurrentExpression();
+    document.getElementById("curr_expression").innerText = new_total;
   };
 
   var checkValidity = function(expr_arr) {
+    //console.log(expr_arr);
     if (expr_arr.length === 0) {
       console.log("Error: Empty equation.");
       return false;
     }
+
+    var first_char = expr_arr[0];
+    var last_char = expr_arr[expr_arr.length-1];
 
     if (operators.includes(expr_arr[0])) {
       console.log("Error: Operators cannot start the equation.");
       return false;
     }
 
-    if (operators.includes(expr_arr[expr_arr.length-1])) {
+    if (operators.includes(last_char) || last_char === "") {
       console.log("Error: operators cannot end be at the end of the equation");
       return false;
     }
@@ -215,5 +201,29 @@
       }
     }
     return expr_arr;
+  }
+
+  myCalculator.keyPress = function(event) {
+    console.log(event.keyCode);
+    let keyMapping = {
+      48: "0",
+      49: "1",
+      50: "2",
+      51: "3",
+      52: "4",
+      53: "5",
+      54: "6",
+      55: "7",
+      56: "8",
+      57: "9",
+      43: "+",
+      45: "-",
+      42: "*",
+      47: "/",
+      61: "=",
+      13: "=",
+      99: "C"
+    }
+    processButton(keyMapping[event.keyCode]);
   }
 })();
