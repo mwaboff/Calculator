@@ -1,6 +1,14 @@
-/*html {
-    box-sizing: border-box;
-}*/
+/*//////////////////////////////////////
+//
+//  Over Complicated Calculator
+// 
+//    Michael Aboff
+//    mwaboff@gmail.com
+//    https://github.com/mwaboff
+//
+//    DSN6040 - Web Design and Javascript
+//
+//////////////////////////////////////*/
 
 body {
     box-sizing: border-box;
@@ -8,7 +16,6 @@ body {
     margin: 0;
     padding: 0;
 }
-
 
 #container {
   display: flex;
@@ -21,6 +28,7 @@ body {
     align-self: center;
 }
 
+/*Calculator Display*/
 #output_container {
     background-color: #272822;
     border-top-left-radius: 5px;
@@ -39,11 +47,7 @@ body {
     margin: 5px;
 }
 
-#total {
-    font-size: 20px;
-    margin: 5px;
-}
-
+/*Buttons*/
 #button_container {
     background-color: #CCCCCC;
     width: 100%;
@@ -87,7 +91,6 @@ body {
 #button_C {
     background-color: #fb6767;
 }
-
 
 .clicked_button {
     filter: brightness(50%);

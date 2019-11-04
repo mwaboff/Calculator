@@ -1,17 +1,32 @@
+<!--/////////////////////////////////////
+//
+//  Over Complicated Calculator
+// 
+//    Michael Aboff
+//    mwaboff@gmail.com
+//    https://github.com/mwaboff
+//
+//    DSN6040 - Web Design and Javascript
+//
+/////////////////////////////////////-->
+
+
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>DSN6042 - Calculator</title>
     <script type="text/javascript" src="calculator.js"></script>
     <link rel="stylesheet" href="calculator.css">
     <link href="https://fonts.googleapis.com/css?family=Orbitron|Work+Sans&display=swap" rel="stylesheet">
 </head>
+
 <body>
+
     <div id="container">
         <div id="calculator_container">
 
             <div id="output_container">
-                <!-- <div id="total"></div> -->
                 <div id="curr_expression"></div>
             </div>
             <div id="button_container"></div>
@@ -22,25 +37,18 @@
         (function() {
             myCalculator.initialize();
 
-            document.onkeypress = function (e) {
-                // Trick found here: https://stackoverflow.com/a/16089470
-                // e = e || window.event;
-                // myCalculator.keyPress(e);
-            };
-
             document.onkeydown = function(e) {
-                // console.log(e);
                 e = e || window.event;
                 myCalculator.keyDown(e);
             }
 
             document.onkeyup = function(e) {
-                // console.log(e);
                 e = e || window.event;
                 myCalculator.keyUp(e);
-
             }
         })();
     </script>
+    
 </body>
+
 </html>
