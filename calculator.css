@@ -12,14 +12,14 @@
 
 body {
     box-sizing: border-box;
-    background-color: orange;
+    background-color: #D95B43;
     margin: 0;
     padding: 0;
 }
 
 #container {
-  display: flex;
-  height: 100vh;
+    display: flex;
+    height: 100vh;
 }
 
 #calculator_container {
@@ -30,7 +30,7 @@ body {
 
 /*Calculator Display*/
 #output_container {
-    background-color: #272822;
+    background-color: #542437;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 
@@ -85,13 +85,25 @@ body {
     grid-row-end: 6;
     grid-column-start: 4;
     grid-column-end: 5;
-    background-color: #63fdb6;
+    background-color: #53777A;
 }
 
 #button_C {
-    background-color: #fb6767;
+    background-color: #C02942;
 }
 
 .clicked_button {
     filter: brightness(50%);
+}
+
+/*Signature*/
+.signature {
+    color: #EFEFEF;
+    z-index: 1000;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+
+    padding: 5px;
+    font-family: 'Work Sans', sans-serif;
 }
