@@ -56,7 +56,7 @@
       new_button.setAttribute("value", options[i]);
       new_button.innerText = options[i];
       parent.appendChild(new_button);
-      new_button.addEventListener("click", myCalculator.buttonClick)
+      new_button.addEventListener("click", buttonClick)
     }
   }
 
@@ -66,7 +66,7 @@
   *
   * @param {event} event - The browser's event action when the key is clicked.
   */
-  myCalculator.buttonClick = function(event) {
+  var buttonClick = function(event) {
     var button_value = event.target.getAttribute("value");
     processButton(button_value);
   };
