@@ -65,7 +65,7 @@
   * Initiates action when button is clicked by the cursor.
   *
   * @param {event} event - The browser's event action when the key is clicked.
-  */
+  */ 
   var buttonClick = function(event) {
     var button_value = event.target.getAttribute("value");
     processButton(button_value);
